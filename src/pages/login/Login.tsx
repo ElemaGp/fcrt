@@ -3,8 +3,12 @@ import MoneyAppIcon from "../../assets/MoneyAppIcon.svg"
 import NotePeople from "../../assets/NotePeople.svg"
 import tickCircle from "../../assets/tickCircle.svg"
 import info from "../../ListInfo"
+import usePasswordToggle from "../../usePasswordToggle"
 
 const Login = () => {
+
+  //password eye-toggle
+  const [passwordInputType, EyeIcon] = usePasswordToggle();
 
   return (
     <div className={style.loginContainer}>
@@ -51,7 +55,10 @@ const Login = () => {
                 </div>
                 <div className={style.eachFormArea}>
                   <label htmlFor="password" className={style.label}>Password</label>
-                    <input id="password" type="password" />
+                  <div className={style.passwordArea}>
+                    <input id="password" type={passwordInputType} />
+                    <div className={style.passwordEyeIcon}>{EyeIcon}</div>
+                  </div>
                 </div>
                 <button>Login</button>
               </form>

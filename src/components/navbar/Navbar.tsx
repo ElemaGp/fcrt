@@ -1,9 +1,10 @@
-import React from 'react'
+import style from "./navbar.module.css"
+import MoneyAppIcon from "../../assets/MoneyAppIcon.svg"
 
 const Navbar = () => {
   return (
-    <div>
-      
+    <div className={style.navbarContainer}>
+      <img src={MoneyAppIcon} alt="Money App Icon" className={style.appIcon} />
     </div>
   )
 }
