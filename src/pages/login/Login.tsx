@@ -4,11 +4,36 @@ import NotePeople from "../../assets/NotePeople.svg"
 import tickCircle from "../../assets/tickCircle.svg"
 import info from "../../ListInfo"
 import usePasswordToggle from "../../usePasswordToggle"
+import { useState, useContext } from "react"
+import { AuthContext } from "../../components/authContext/AuthContext"
+import { login } from "../../components/authContext/apiCalls"
+
+interface theUserProp {
+  email: string;
+  password: string;
+}
 
 const Login = () => {
 
+  const {dispatch} = useContext(AuthContext);
+
+  const [theUser, setTheUser] = useState<theUserProp>({
+    email: "",
+    password:"",
+  });
+
   //password eye-toggle
   const [passwordInputType, EyeIcon] = usePasswordToggle();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    const value = e.target.value;
+    setTheUser({...theUser, [e.target.name]: value});
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
+    e.preventDefault();
+    login(theUser, dispatch);
+  }
 
   return (
     <div className={style.loginContainer}>
@@ -46,15 +71,15 @@ const Login = () => {
               <h2>Login to your dashboard</h2>
               <p className={style.loginRightDesc}>Provide details to login to your account</p>
 
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className={style.eachFormArea}>
                   <label htmlFor="email" className={style.label}>Email</label>
-                    <input id="email" type="email" />
+                    <input id="email" name="email" type="email" value={theUser.email} onChange={handleChange}/>
                 </div>
                 <div className={style.eachFormArea}>
                   <label htmlFor="password" className={style.label}>Password</label>
                   <div className={style.passwordArea}>
-                    <input id="password" type={passwordInputType} />
+                    <input id="password" name="password" type={passwordInputType} value={theUser.password} onChange={handleChange}/>
                     <div className={style.passwordEyeIcon}>{EyeIcon}</div>
                   </div>
                 </div>

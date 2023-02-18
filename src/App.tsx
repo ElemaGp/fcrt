@@ -2,6 +2,7 @@ import './App.css';
 import Profile from './pages/profile/Profile';
 import {ApolloClient, InMemoryCache, ApolloProvider, HttpLink, from, } from '@apollo/client';
 import {onError} from '@apollo/client/link/error'
+import Login from './pages/login/Login';
 
 type graphqlErrorsProp = any;
 
@@ -29,7 +30,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <Profile />
+        <Login />
       </div>
     </ApolloProvider>
   );
