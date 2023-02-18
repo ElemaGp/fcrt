@@ -17,11 +17,10 @@ const Login = () => {
         <div className={style.loginLeftContent}>
             <img src={MoneyAppIcon} alt="Money App Icon" className={style.moneyAppIcon} />
             <h1 className={style.loginLeftHeading}>Hi there, see what's new</h1>
-            <p className={style.loginLeftDesc}>Here's how Foodcourt helps you manage your daily operations</p>
-            <p className={`${style.loginLeftDesc} ${style.lowermargin}`}>and ensure your riders are efficient</p>
+            <p className={`${style.loginLeftDesc} ${style.lowermargin}`}>Here's how Foodcourt helps you manage your daily operations <br /> and ensure your riders are efficient</p>
             
             {info.map((infoData)=>(
-                <div className={style.eachloginLeftList}>
+                <div className={style.eachloginLeftList} key={infoData.heading}>
                   <img src={infoData.image} alt={infoData.heading} />
                   <div>
                     <p className={style.loginLeftListHeading}>{infoData.heading}</p>
@@ -35,8 +34,7 @@ const Login = () => {
                   <img src={NotePeople} alt="delegate to staff" />
                   <div>
                     <p className={style.loginLeftListHeading}>Delegate to Staff</p>
-                    <p className={style.loginLeftListDesc}>Easily see how much your businesses are earning on</p>
-                    <p className={style.loginLeftListDesc}>each transaction and watch your earnings rise.</p>
+                    <p className={style.loginLeftListDesc}>Easily see how much your businesses are earning on <br /> each transaction and watch your earnings rise.</p>
                   </div>
                   <img src={tickCircle} alt="checkmark" className={style.checkmark} />
             </div>
