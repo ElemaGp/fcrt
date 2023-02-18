@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Navbar from "../../components/navbar/Navbar"
 import style from "./profile.module.css"
 import profileTimer from "../../assets/profileTimer.svg"
@@ -9,12 +9,32 @@ import profileNotifications from "../../assets/profileNotifications.svg"
 import { useQuery, gql } from "@apollo/client";
 import { LOAD_COMPANY_INFO } from "../../components/graphql/Queries"
 
+interface infoProps {
+  company:{
+        ceo: string
+        cto: string
+        name: string
+        __typename: string
+      }
+}
+
 const Profile = () => {
 
   const {error, loading, data} = useQuery(LOAD_COMPANY_INFO)
 
+  const [info , setInfo] = useState<infoProps>({
+    company:{
+      ceo: "",
+      cto: "",
+      name: "",
+      __typename: "",
+    }
+  });
+
   useEffect(()=>{
-    console.log(data);
+    if (data){
+      setInfo(data);
+    }
   },[data])
 
   return (
@@ -26,15 +46,15 @@ const Profile = () => {
             <div className={style.profileLeftContent}>
                 <div className={style.profileLeftTop}>
                     <p className={style.profileLogo}>CN</p>
-                    <h2>COMPANY NAME</h2>
+                    <h2>{info.company.name}</h2>
                 </div>
                 <div className={style.eachTitleAndName}>
                     <p className={style.title}>CEO</p>
-                    <p className={style.name}>CEO NAME</p>
+                    <p className={style.name}>{info.company.ceo}</p>
                 </div>
                 <div className={style.eachTitleAndName}>
-                    <p className={style.title}>CEO</p>
-                    <p className={style.name}>CEO NAME</p>
+                    <p className={style.title}>CTO</p>
+                    <p className={style.name}>{info.company.cto}</p>
                 </div>
             </div>
         </div>
