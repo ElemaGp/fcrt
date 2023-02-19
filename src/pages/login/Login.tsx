@@ -1,4 +1,3 @@
-
 import style from "./login.module.css"
 import MoneyAppIcon from "../../assets/MoneyAppIcon.svg"
 import NotePeople from "../../assets/NotePeople.svg"
