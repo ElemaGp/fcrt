@@ -68,7 +68,7 @@ const Profile = () => {
             <div className={style.profileRightCenter}>
               {newInfoImages.map((eachItem)=>(
                 <div className={style.eachProfileRightCenterItem} key={eachItem.id}>
-                  <img src={eachItem.image} alt="Profile party" />
+                  <img src={eachItem.image} alt={eachItem.alt} />
                   <div>
                     <p> <Skeleton width={194} height={14} borderRadius={4} /> </p>
                     <p> <Skeleton width={132} height={14} borderRadius={4} /> </p>
