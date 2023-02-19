@@ -151,7 +151,6 @@ button:active{
         min-height: 100vh;
         align-items: center;
         justify-content: center;
-        border: solid 1px yellow;
     }
     .loginLeft{
         display: none;
@@ -161,14 +160,11 @@ button:active{
         height: max-content;
         margin-left: auto;
         margin-right: auto;
-        
-        border: solid 1px blue;
     }
 
     .loginRightContent{
         margin-left: 0px;
         margin-top: 0;
-        border: solid 1px green;
     }
 
     
@@ -210,14 +206,13 @@ button:active{
         margin-left: 10px;
         margin-right: 10px;
     }
-    
+
     input{
         width: 12rem;
     }
 
     .passwordEyeIcon{
-        right: 13px;
+        right: 20px;
     }
-
    
 }
