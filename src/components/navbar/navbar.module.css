@@ -1,0 +1,9 @@
+.navbarContainer{
+    height: 82px;
+    border-bottom: 0.7px solid hsl(214, 25%, 89%);
+    margin-bottom: 16px;
+}
+
+.appIcon{
+    margin-left: 53px;
+}

@@ -1,7 +1,6 @@
 .loginContainer{
     display: flex;
     background-color: rgba(255, 236, 236, 0.795);
-    height: 100vh;
 }
 
 .loginLeft{
@@ -112,6 +111,21 @@ input{
     box-shadow: 0px 0px 1px 4px #F0F0F0;
 }
 
+.passwordArea{
+    position: relative;
+
+}
+
+.passwordEyeIcon{
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    font-size: 2rem;
+    opacity: 0.7;
+    cursor: pointer;
+    color: #A6A6A6;
+}
+
 button{
     width: 100%;
     margin-top: 56px;
@@ -121,4 +135,84 @@ button{
     border: none;
     color: white;
     cursor: pointer;
+}
+
+button:active{
+    background: #50b98a;
+}
+
+
+
+
+/*============== MEDIA QUERIES (MEDIUM DEVICES) ie. tablets ============= */
+@media screen and (max-width: 1024px) {
+
+    .loginContainer{
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+    }
+    .loginLeft{
+        display: none;
+    }
+
+    .loginRight{
+        height: max-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .loginRightContent{
+        margin-left: 0px;
+        margin-top: 0;
+    }
+
+    
+}
+
+/*============== MEDIA QUERIES (SMALL DEVICES) ie. phones ============= */
+@media screen and (max-width: 600px) {
+    .loginRightContent{
+        padding: 2rem;
+    }
+
+    input{
+        width: 18rem;
+        height: 25px;
+    }
+
+    .passwordEyeIcon{
+        right: 10px;
+    }
+
+    button{
+        width: 100%;
+        padding: 1rem 0;
+    }
+}
+
+/*============== MEDIA QUERIES (SMALLER DEVICES) ie. phones ============= */
+@media screen and (max-width: 375px) {
+    .loginRightContent{
+        padding: 1rem;
+    }
+}
+
+/*============== MEDIA QUERIES (SMALLER DEVICES) ie. phones ============= */
+@media screen and (max-width: 280px) {
+
+    .loginRightContent{
+        padding: 1rem;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    input{
+        width: 12rem;
+    }
+
+    .passwordEyeIcon{
+        right: 20px;
+    }
+   
 }

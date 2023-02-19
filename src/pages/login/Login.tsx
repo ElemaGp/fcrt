@@ -3,8 +3,60 @@ import MoneyAppIcon from "../../assets/MoneyAppIcon.svg"
 import NotePeople from "../../assets/NotePeople.svg"
 import tickCircle from "../../assets/tickCircle.svg"
 import info from "../../ListInfo"
+import usePasswordToggle from "../../usePasswordToggle"
+import { useState, useContext } from "react"
+import { AuthContext } from "../../components/authContext/AuthContext"
+import { login } from "../../components/authContext/apiCalls"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+interface theUserProp {
+  email: string;
+  password: string;
+}
 
 const Login = () => {
+
+  const {error, errorMessage, dispatch} = useContext(AuthContext);
+
+  const [theUser, setTheUser] = useState<theUserProp>({
+    email: "",
+    password:"",
+  });
+
+  //password eye-toggle
+  const [passwordInputType, EyeIcon] = usePasswordToggle();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    const value = e.target.value;
+    setTheUser({...theUser, [e.target.name]: value});
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
+    e.preventDefault();
+    login(theUser, dispatch);
+
+    if(error){
+      notify();
+    }
+  }
+
+
+  const notify = () => {
+    toast(errorMessage, {    
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    }); 
+}
+
+
+  
 
   return (
     <div className={style.loginContainer}>
@@ -13,11 +65,10 @@ const Login = () => {
         <div className={style.loginLeftContent}>
             <img src={MoneyAppIcon} alt="Money App Icon" className={style.moneyAppIcon} />
             <h1 className={style.loginLeftHeading}>Hi there, see what's new</h1>
-            <p className={style.loginLeftDesc}>Here's how Foodcourt helps you manage your daily operations</p>
-            <p className={`${style.loginLeftDesc} ${style.lowermargin}`}>and ensure your riders are efficient</p>
+            <p className={`${style.loginLeftDesc} ${style.lowermargin}`}>Here's how Foodcourt helps you manage your daily operations <br /> and ensure your riders are efficient</p>
             
             {info.map((infoData)=>(
-                <div className={style.eachloginLeftList}>
+                <div className={style.eachloginLeftList} key={infoData.heading}>
                   <img src={infoData.image} alt={infoData.heading} />
                   <div>
                     <p className={style.loginLeftListHeading}>{infoData.heading}</p>
@@ -31,8 +82,7 @@ const Login = () => {
                   <img src={NotePeople} alt="delegate to staff" />
                   <div>
                     <p className={style.loginLeftListHeading}>Delegate to Staff</p>
-                    <p className={style.loginLeftListDesc}>Easily see how much your businesses are earning on</p>
-                    <p className={style.loginLeftListDesc}>each transaction and watch your earnings rise.</p>
+                    <p className={style.loginLeftListDesc}>Easily see how much your businesses are earning on <br /> each transaction and watch your earnings rise.</p>
                   </div>
                   <img src={tickCircle} alt="checkmark" className={style.checkmark} />
             </div>
@@ -44,20 +94,23 @@ const Login = () => {
               <h2>Login to your dashboard</h2>
               <p className={style.loginRightDesc}>Provide details to login to your account</p>
 
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className={style.eachFormArea}>
                   <label htmlFor="email" className={style.label}>Email</label>
-                    <input id="email" type="email" />
+                    <input id="email" name="email" type="email" value={theUser.email} onChange={handleChange}/>
                 </div>
                 <div className={style.eachFormArea}>
                   <label htmlFor="password" className={style.label}>Password</label>
-                    <input id="password" type="password" />
+                  <div className={style.passwordArea}>
+                    <input id="password" name="password" type={passwordInputType} value={theUser.password} onChange={handleChange}/>
+                    <div className={style.passwordEyeIcon}>{EyeIcon}</div>
+                  </div>
                 </div>
                 <button>Login</button>
               </form>
             </div>
       </div>
-
+      <ToastContainer />
     </div>
   )
 }
