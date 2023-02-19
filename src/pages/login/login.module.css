@@ -138,6 +138,6 @@ button{
     cursor: pointer;
 }
 
-button:focus{
+button:active{
     background: #50b98a;
 }

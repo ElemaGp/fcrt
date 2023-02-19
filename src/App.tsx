@@ -4,15 +4,16 @@ import Profile from './pages/profile/Profile';
 import {ApolloClient, InMemoryCache, ApolloProvider, HttpLink, from, } from '@apollo/client';
 import {onError} from '@apollo/client/link/error'
 import Login from './pages/login/Login';
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from './components/authContext/AuthContext';
+import { logout } from './components/authContext/AuthActions';
 
 
 type graphqlErrorsProp = any;
 
-const errorLink = onError(({ graphqlErrors, networkError}:graphqlErrorsProp) =>{
+const errorLink = onError(({ graphqlErrors}:graphqlErrorsProp) =>{
   if (graphqlErrors) {
-    graphqlErrors.map(({message, location, path}:graphqlErrorsProp)=>{
+    graphqlErrors.map(({message}:graphqlErrorsProp)=>{
       alert(`Graphql error ${message}`);
       return message
     });
@@ -35,7 +36,18 @@ const client = new ApolloClient({
 
 function App() {
 
-  const {user} = useContext(AuthContext);
+  const {user, dispatch} = useContext(AuthContext);
+
+  useEffect(() => {
+    if (user){
+    setTimeout(() => {
+      if (dispatch){
+      dispatch(logout());
+      }
+    }, 120000);
+  }
+  }, [user, dispatch]);
+
 
   return (
     <ApolloProvider client={client}>

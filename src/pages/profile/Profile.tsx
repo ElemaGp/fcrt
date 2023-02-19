@@ -6,7 +6,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import newInfoImages from "../../ComingSoonInfo"
 import profileNotifications from "../../assets/profileNotifications.svg"
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { LOAD_COMPANY_INFO } from "../../components/graphql/Queries"
 
 interface infoProps {
@@ -20,7 +20,7 @@ interface infoProps {
 
 const Profile = () => {
 
-  const {error, loading, data} = useQuery(LOAD_COMPANY_INFO)
+  const {data} = useQuery(LOAD_COMPANY_INFO)
 
   const [info , setInfo] = useState<infoProps>({
     company:{

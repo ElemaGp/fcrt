@@ -1,3 +1,4 @@
+
 import style from "./login.module.css"
 import MoneyAppIcon from "../../assets/MoneyAppIcon.svg"
 import NotePeople from "../../assets/NotePeople.svg"
@@ -7,6 +8,8 @@ import usePasswordToggle from "../../usePasswordToggle"
 import { useState, useContext } from "react"
 import { AuthContext } from "../../components/authContext/AuthContext"
 import { login } from "../../components/authContext/apiCalls"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface theUserProp {
   email: string;
@@ -15,7 +18,7 @@ interface theUserProp {
 
 const Login = () => {
 
-  const {dispatch} = useContext(AuthContext);
+  const {error, errorMessage, dispatch} = useContext(AuthContext);
 
   const [theUser, setTheUser] = useState<theUserProp>({
     email: "",
@@ -33,7 +36,28 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
     login(theUser, dispatch);
+
+    if(error){
+      notify();
+    }
   }
+
+
+  const notify = () => {
+    toast(errorMessage, {    
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    }); 
+}
+
+
+  
 
   return (
     <div className={style.loginContainer}>
@@ -87,7 +111,7 @@ const Login = () => {
               </form>
             </div>
       </div>
-
+      <ToastContainer />
     </div>
   )
 }

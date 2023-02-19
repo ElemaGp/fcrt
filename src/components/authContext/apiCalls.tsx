@@ -1,4 +1,3 @@
-// import axios from "axios";
 import { loginFailure, loginStart, loginSuccess } from "./AuthActions";
 
 type userProp = {
@@ -13,19 +12,14 @@ export const login = (user:userProp, dispatch: any) => {
         password: "foodcourt123"
     }
 
-    const error = "Wrong Username or Password"
+    const error = "Wrong Email or Password"
 
     dispatch(loginStart());
-
-    console.log(user);
-    console.log(dummyUser);
     
     if(JSON.stringify(user) === JSON.stringify(dummyUser)){
         dispatch(loginSuccess(user));
-        console.log("success");
     }else{
         dispatch(loginFailure(error));
-        console.log("fail");
     };
 
     }

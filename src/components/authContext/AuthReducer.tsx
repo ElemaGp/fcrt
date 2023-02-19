@@ -1,4 +1,3 @@
-
 import { loginSuccessUserProp } from "./AuthActions";
 
 type actionProp = {

@@ -14,7 +14,7 @@ export type initialStateArgument = {
 const userLs = localStorage.getItem("user");
 
 const INITIAL_STATE:initialStateArgument = {
-    user: userLs ? JSON.parse(userLs) : null, //if the user had logged in before, the initial state when he comes back to the website will be the "userL" which you declared above as the variable which stores the user item in localstorage. Else, if he hadn't logged in, it'll be null.
+    user: userLs ? JSON.parse(userLs) : null, 
     isFetching: false,
     error: false,
     errorMessage: null
@@ -30,9 +30,9 @@ type authContextProviderProps = {
 export const AuthContextProvider = ({children} : authContextProviderProps) =>{
     const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
-    //storing the user object in the browser whenever it's generated after login
+    //storing the user object in the localstorage whenever it's generated after login
     useEffect(()=>{
-      localStorage.setItem("user", JSON.stringify(state.user)) //this useEffect fires everytime the state of the "user" object changes, which happens during login and logout
+      localStorage.setItem("user", JSON.stringify(state.user)) 
     },[state.user]);
 
     return (
